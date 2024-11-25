@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment Calendar</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Appointment Calendar</h1>
+    <div class="calendar-container">
+        <div class="calendar-header">
+            <button onclick="changeMonth(-1)">Prev</button>
+            <span id="currentMonth"></span>
+            <button onclick="changeMonth(1)">Next</button>
+        </div>
+        
+        <div id="calendar" class="calendar"></div>
+
+        <!-- Modal to add appointment -->
+        <div id="appointmentModal" class="appointment-modal">
+            <h3>Add Appointment</h3>
+            <input type="text" id="appointmentTitle" placeholder="Title">
+            <textarea id="appointmentDescription" placeholder="Description"></textarea>
+            <input type="time" id="appointmentTime">
+            <button onclick="addAppointment()">Add Appointment</button>
+            <button onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
