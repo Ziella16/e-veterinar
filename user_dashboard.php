@@ -35,16 +35,16 @@ if (isset($_POST['booking'])) {
     $date = $_POST['booking']['date'];
 
     echo $date;
-    
+
     // $date1 = date("Y-m-d", strtotime($date));  
     // echo $date1;
 
     // $date1=date_create($date);
     // echo date_format($date1,"Y/m/d H:i:s");
-    $time1a = date("Y-m-d H:i:s", strtotime($date . " $time1"));  
-// echo $time1a;
+    $time1a = date("Y-m-d H:i:s", strtotime($date . " $time1"));
+    // echo $time1a;
     // $time1b = date_format($time1a, "Y-m-d H:i");
-    $time2a = date("Y-m-d H:i:s", strtotime($date . " $time2"));  
+    $time2a = date("Y-m-d H:i:s", strtotime($date . " $time2"));
 
     // $time2a = date_create("2013-03-15 " . $time2);
     // $time2b = date_format($time2a, "Y-m-d H:i");
@@ -502,7 +502,7 @@ if (isset($_POST['booking'])) {
             <h2>Welcome, <?php echo htmlspecialchars($user['username']); ?>!</h2>
             <p>ID Pengguna: <?php echo $user['id']; ?></p>
             <p>Email: <?php echo htmlspecialchars($user['email']); ?></p>
-            <p>
+            <!-- <p>
                 <?php
                 $query = "SELECT * FROM `events`";
                 $results = mysqli_query($conn, $query);
@@ -513,7 +513,7 @@ if (isset($_POST['booking'])) {
                     echo $row['start_date'];
                 }
                 ?>
-            </p>
+            </p> -->
             <a href="logout.php" class="logout-btn">Log Keluar</a>
         </div>
 </body>
