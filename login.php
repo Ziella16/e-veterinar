@@ -62,7 +62,7 @@
         $result= $database->query("select * from webuser where email='$email'");
         if($result->num_rows==1){
             $utype=$result->fetch_assoc()['usertype'];
-            if ($utype=='p'){
+            if ($utype=='p'){   
                 $checker = $database->query("select * from patient where pemail='$email' and ppassword='$password'");
                 if ($checker->num_rows==1){
 
@@ -70,7 +70,13 @@
                     //   Patient dashbord
                     $_SESSION['user']=$email;
                     $_SESSION['usertype']='p';
-                    
+
+                    $user = $checker->fetch_assoc();
+
+                    $_SESSION['user_phone'] = $user['ptel'];
+                    $_SESSION['user_name'] = $user['pname'];
+                    $_SESSION['user_id'] = $user['pid'];
+
                     header('location: patient/index.php');
 
                 }else{

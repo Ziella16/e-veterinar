@@ -4,5 +4,5 @@
     if ($database->connect_error){
         die("Connection failed:  ".$database->connect_error);
     }
-
+    $site_url = 'http://localhost/e-veterinar';
 ?>
