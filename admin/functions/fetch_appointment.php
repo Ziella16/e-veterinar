@@ -9,7 +9,7 @@ if (isset($_POST['fetch_appointment'])) {
 
 
     $query =
-        "SELECT a.*, b.name as pet_name,b.gender as gender, b.breed as breed,  b.age as age, c.pname as owner_name2  , c.ptel as owner_contact FROM appointment_list a 
+        "SELECT a.*, b.name as pet_name,b.gender as gender, b.breed as breed,  b.age as age, c.pname as owner_name2  , c.ptel as owner_contact , c.pemail  FROM appointment_list a 
         INNER JOIN pet b ON b.id = a.pet_id 
         INNER JOIN patient c ON c.pid = a.owner_name;
         ";
@@ -28,6 +28,7 @@ if (isset($_POST['fetch_appointment'])) {
              'allDay' => 'true',
              'owner_contact' =>  $row['owner_contact'],
              'owner_name' =>  $row['owner_name2'],
+             'owner_email' =>  $row['pemail'],
              'pet_name' => $row['pet_name'],
              'pet_age' => $row['age'],
              'pet_gender' => $row['gender'],

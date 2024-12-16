@@ -36,6 +36,7 @@ include("../connection.php");
                     <div class="modal-body">
                         <input type="hidden" class="form-control" id="date" name="date">
                         <input type="hidden" class="form-control" id="id" name="id">
+                        <input type="hidden" class="form-control" id="email" name="email">
                         <div class="row">
 
                             <div class="col-6 mb-3">
@@ -210,6 +211,8 @@ include("../connection.php");
         $('#id').val(info.event.id);
         $('#owner_name').val(info.event.extendedProps.owner_name);
         $('#owner_phone').val(info.event.extendedProps.owner_contact);
+        
+        $('#email').val(info.event.extendedProps.owner_email);
 
         $('#pet_name').val(info.event.extendedProps.pet_name);
         $('#pet_age').val(info.event.extendedProps.pet_age);

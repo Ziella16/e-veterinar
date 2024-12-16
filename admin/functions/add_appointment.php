@@ -1,6 +1,54 @@
 <?php
 include("../../connection.php");
+ require __DIR__ . '/../vendor/autoload.php';
 
+// echo __DIR__ . '/../';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../../');
+$dotenv->load();
+// Now you can use PHPMailer classes
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
+function sendmail($receiver, $title, $filepath, $var = "")
+{
+
+
+
+
+
+    $mail = new PHPMailer(true);
+
+    try {
+
+        $mail->isSMTP();
+        $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+        $mail->Host = 'e-veterinar.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = $_ENV['email6_username'];
+        $mail->Password = $_ENV['email6_password'];
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $mail->Port = 465; // Adjust as needed (e.g., 465 for SSL)
+
+
+        $mail->setFrom('appointment@e-veterinar.com', 'Attendance');
+        $mail->addAddress($receiver);
+
+
+
+
+        $mail->isHTML(true);
+
+        $mail->Subject = $title;
+
+        $mail->Body = $var['content'];         // Set the body with the content from the .php file
+        $mail->AltBody = $title;
+        $mail->send();
+        // echo 'Message has been sent';
+    } catch (Exception $e) {
+        echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+    }
+}
 
 if (isset($_POST['add_appointment'])) {
 
@@ -50,8 +98,11 @@ if (isset($_POST['set_appointment'])) {
     $id = $_POST['id'];
     $doc_id = $_POST['vet'];
     $slot = $_POST['slot'];
+    $email = $_POST['email'];
 
-
+    $var = [
+        'content' => 'Appointment Has Been Approved'
+    ];
 
     $time_slots = [
         1 => ['start' => '9:00AM', 'end' => '9:30AM'],
@@ -77,7 +128,10 @@ if (isset($_POST['set_appointment'])) {
 
 
     $results = mysqli_query($database, $query);
-    header('location:' . $site_url . '/admin/book_appointment.php');
+    sendmail($email, "Appointment Time", "",  $var );
+
+    // header('location:' . $site_url . '/admin/book_appointment.php');
+
 
 }
 
