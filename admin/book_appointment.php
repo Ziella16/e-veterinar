@@ -195,6 +195,8 @@ include("../connection.php");
             events: getAllEvents,
             eventClick: EventClick,
             dateClick: DateClick,
+            weekends:false,
+
         });
         calendar.render();
     });
