@@ -130,7 +130,7 @@ if (isset($_POST['set_appointment'])) {
     $results = mysqli_query($database, $query);
     sendmail($email, "Appointment Time", "",  $var );
 
-    // header('location:' . $site_url . '/admin/book_appointment.php');
+    header('location:' . $site_url . '/admin/book_appointment.php');
 
 
 }
