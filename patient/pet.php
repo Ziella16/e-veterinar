@@ -52,7 +52,7 @@
     //echo $username;
     
 
-    $sqlmain = "select appointment.appoid,schedule.scheduleid,schedule.title,doctor.docname,patient.pname,schedule.scheduledate,schedule.scheduletime,appointment.apponum,appointment.appodate from schedule inner join appointment on schedule.scheduleid=appointment.scheduleid inner join patient on patient.pid=appointment.pid inner join doctor on schedule.docid=doctor.docid  where  patient.pid=$userid ";
+    $sqlmain = "SELECT pet.* , category_list.name AS category_name FROM `pet`INNER JOIN category_list ON category_list.id = pet.category_id WHERE pet.owner_id ='$userid';";
 
     if ($_POST) {
         //print_r($_POST);
@@ -60,19 +60,12 @@
 
 
 
-        if (!empty($_POST["sheduledate"])) {
-            $sheduledate = $_POST["sheduledate"];
-            $sqlmain .= " and schedule.scheduledate='$sheduledate' ";
-        }
-        ;
-
 
 
         //echo $sqlmain;
     
     }
 
-    $sqlmain .= "order by appointment.appodate  asc";
     $result = $database->query($sqlmain);
     ?>
     <div class="container">
@@ -184,7 +177,8 @@
                     </p> -->
                 </td>
                 <td width="10%">
-                    <a class="btn-label" style="display: flex;justify-content: center;align-items: center;"  href="add_pet.php">Add</a>
+                    <a class="btn-label" style="display: flex;justify-content: center;align-items: center;"
+                        href="add_pet.php">Add</a>
                 </td>
 
 
@@ -276,56 +270,49 @@
 
                                         for ($x = 0; $x < ($result->num_rows); $x++) {
                                             echo "<tr>";
-                                            for ($q = 0; $q < 3; $q++) {
-                                                $row = $result->fetch_assoc();
-                                                if (!isset($row)) {
-                                                    break;
-                                                }
-                                                ;
-                                                $scheduleid = $row["scheduleid"];
-                                                $title = $row["title"];
-                                                $docname = $row["docname"];
-                                                $scheduledate = $row["scheduledate"];
-                                                $scheduletime = $row["scheduletime"];
-                                                $apponum = $row["apponum"];
-                                                $appodate = $row["appodate"];
-                                                $appoid = $row["appoid"];
 
-                                                if ($scheduleid == "") {
-                                                    break;
-                                                }
+                                            $row = $result->fetch_assoc();
 
-                                                echo '
+
+                                            $pet_name = $row['name'];
+                                            $breed = $row['breed'];
+                                            $gender = $row['gender'];
+                                            $age = $row['age'];
+                                            $category_name = $row['category_name'];
+
+
+                                            echo '
                                             <td style="width: 25%;">
                                                     <div  class="dashboard-items search-items"  >
                                                     
                                                         <div style="width:100%;">
-                                                        <div class="h3-search">
-                                                                    Booking Date: ' . substr($appodate, 0, 30) . '<br>
-                                                                    Reference Number: OC-000-' . $appoid . '
-                                                                </div>
+ 
                                                                 <div class="h1-search">
-                                                                    ' . substr($title, 0, 21) . '<br>
+                                                                    ' . $pet_name  . '<br>
                                                                 </div>
                                                                 <div class="h3-search">
-                                                                    Appointment Number:<div class="h1-search">0' . $apponum . '</div>
+                                                                   ' . $breed  . '
                                                                 </div>
-                                                                <div class="h3-search">
-                                                                    ' . substr($docname, 0, 30) . '
-                                                                </div>
-                                                                
+                                                            
                                                                 
                                                                 <div class="h4-search">
-                                                                    Scheduled Date: ' . $scheduledate . '<br>Starts: <b>@' . substr($scheduletime, 0, 5) . '</b> (24h)
+                                                                   ' . $gender  . '
+                                                                </div>
+                                                                      
+                                                                <div class="h4-search">
+                                                                   ' . $breed  . '
+                                                                </div>
+                                                                      
+                                                                <div class="h4-search">
+                                                                   ' . $age  . '
                                                                 </div>
                                                                 <br>
-                                                                <a href="?action=drop&id=' . $appoid . '&title=' . $title . '&doc=' . $docname . '" ><button  class="login-btn btn-primary-soft btn "  style="padding-top:11px;padding-bottom:11px;width:100%"><font class="tn-in-text">Cancel Booking</font></button></a>
-                                                        </div>
+                                                         </div>
                                                                 
                                                     </div>
                                                 </td>';
 
-                                            }
+
                                             echo "</tr>";
 
                                             // for ( $x=0; $x<$result->num_rows;$x++){

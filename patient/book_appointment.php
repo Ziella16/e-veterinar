@@ -20,6 +20,8 @@ include("../connection.php");
                     <h4 class="card-title">Appointment Availablity</h4>
                 </div>
                 <div class="card-body">
+                <input type="hidden" class="form-control" id="user_id" value="<?php echo $_SESSION['user_id'] ?>">
+
                     <div id="appointmentCalendar"></div>
                 </div>
             </div>
@@ -41,7 +43,7 @@ include("../connection.php");
 
                         ?>
                         <input type="hidden" class="form-control" name="owner_name"
-                            value="<?php echo $_SESSION['user_name'] ?>">
+                            value="<?php echo $_SESSION['user_id'] ?>">
                         <input type="hidden" class="form-control" name="contact"
                             value="<?php echo $_SESSION['user_phone'] ?>">
 
@@ -148,14 +150,16 @@ include("../connection.php");
         function getAllEvents(info, successCallback, failureCallback) {
             console.log((info.startStr));
             console.log((info.endStr));
+            var user_id = $('#user_id').val();
 
             $.ajax({
                 type: "POST",
                 url: "../admin/functions/fetch_appointment.php",
                 data: {
-                    fetch_appointment: {
+                    fetch_appointment_patient: {
                         start: info.startStr,
                         end: info.endStr,
+                        user_id: user_id,
                     },
                 },
                 success: function (response) {

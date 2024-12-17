@@ -344,6 +344,9 @@ ORDER BY
                                         if ($row["service_status"] == '1') {
                                             $status = 'Done';
                                         }
+                                        if ($row["service_status"] == '0') {
+                                            $status = 'Ongoing';
+                                        }
                                         if ($row["service_status"] == 'Not Assigned') {
                                             $status = 'Not Yet';
                                         }
