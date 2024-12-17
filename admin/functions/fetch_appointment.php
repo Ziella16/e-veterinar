@@ -56,7 +56,7 @@ if (isset($_POST['fetch_appointment_patient'])) {
         "SELECT a.*, b.name as pet_name,b.gender as gender, b.breed as breed,  b.age as age, c.pname as owner_name2  , c.ptel as owner_contact , c.pemail  FROM appointment_list a 
         INNER JOIN pet b ON b.id = a.pet_id 
         INNER JOIN patient c ON c.pid = a.owner_name
-        WHERE c.pid = '$pid'
+        WHERE a.owner_name= '$pid'
         ";
 
 
