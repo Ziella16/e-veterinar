@@ -28,6 +28,9 @@ if (isset($_POST['fetch_appointment'])) {
         if ($row['status'] == '1'  ) {
             $color = '#66BB6A';
         }
+        if ($row['status'] == '2'  ) {
+            $color = '#78909C';
+        }
         $events[] = array(
             'id' => $row['id'],                       // Unique identifier for the event
             'title' => $row['pet_name'],                // Status or description of the event

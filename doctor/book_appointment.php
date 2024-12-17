@@ -35,7 +35,7 @@ include("../connection.php");
                 <form method="POST" action="../admin/functions/add_appointment.php">
                     <div class="modal-body">
                         <input type="hidden" class="form-control" id="date" name="date">
-                        <input type="hidden" class="form-control" id="id" name="id">
+                        <input type="hidden" class="form-control" id="event_id" name="event_id">
                         <div class="row">
 
                             <div class="col-6 mb-3">
@@ -82,10 +82,11 @@ include("../connection.php");
 
 
 
-                        <div>
+                        <div id="radiobtn2" class=" d-none">
 
-                            <div class="form-check form-check-inline  ">
-                                <input class="form-check-input" type="radio" name="status" id="inlineRadio1" value="0" checked>
+                            <div class="form-check form-check-inline ">
+                                <input class="form-check-input" type="radio" name="status" id="inlineRadio1" value="0"
+                                    checked>
                                 <label class="form-check-label" for="inlineRadio1">Unfinished</label>
                             </div>
                             <div class="form-check form-check-inline">
@@ -98,7 +99,8 @@ include("../connection.php");
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" name="set_appointment2">Save changes</button>
+                        <button type="submit" class="btn btn-primary  d-none" name="set_appointment2" id="updateap">Save
+                            changes</button>
                     </div>
                 </form>
 
@@ -141,7 +143,7 @@ include("../connection.php");
 
                                 ?>
 
-                            </select >
+                            </select>
                         </div>
 
                         <div class="mb-3">
@@ -154,10 +156,10 @@ include("../connection.php");
                             </select>
                         </div>
 
-                        <div id="option">
+                        <div id="option2">
 
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="option" value="1" >
+                                <input class="form-check-input" type="radio" name="option" value="1">
                                 <label class="form-check-label" for="flexCheckChecked">
                                     Circum
                                 </label>
@@ -262,7 +264,7 @@ include("../connection.php");
             events: getAllEvents,
             eventClick: EventClick,
             dateClick: DateClick,
-            weekends:false,
+            weekends: false,
 
         });
         calendar.render();
@@ -281,15 +283,29 @@ include("../connection.php");
         // $('#date').val(info.dateStr);
         $('#owner_name').val(info.event.extendedProps.owner_name);
         $('#owner_phone').val(info.event.extendedProps.owner_contact);
+        $('#event_id').val(info.event.id);
 
+        
         $('#pet_name').val(info.event.extendedProps.pet_name);
         $('#pet_age').val(info.event.extendedProps.pet_age);
         $('#pet_baka').val(info.event.extendedProps.pet_breed);
         $('#pet_gender').val(info.event.extendedProps.pet_gender);
         $('#detail').val(info.event.extendedProps.detail);
 
- 
+        if (info.event.extendedProps.status == '0') {
+            $('#radiobtn2').removeClass("d-none");
+            $('#updateap').removeClass("d-none");
 
+        } else {
+            if (!$("#radiobtn2").hasClass("d-none")) {
+
+                $('#radiobtn2').addClass("d-none");
+            }
+            if (!$("#updateap").hasClass("d-none")) {
+
+                $('#updateap').addClass("d-none");
+            }
+        }
         console.log(info.event);
     };
     $("#option").on("click", function () {

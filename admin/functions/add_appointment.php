@@ -144,7 +144,7 @@ if (isset($_POST['set_appointment'])) {
 if (isset($_POST['set_appointment2'])) {
     var_dump($_POST);
 
-    $id = $_POST['id'];
+    $id = $_POST['event_id'];
     $status = $_POST['status'];
     // $slot = $_POST['slot'];
 

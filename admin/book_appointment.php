@@ -81,7 +81,7 @@ include("../connection.php");
                             </div>
                         </div>
 
-                        <div class="row">
+                        <div class="row d-none" id="radiobtn2">
 
                             <div class="col-6 mb-3">
 
@@ -147,7 +147,7 @@ include("../connection.php");
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary" name="set_appointment">Save changes</button>
+                        <button type="submit" class="btn btn-primary  d-none" name="set_appointment" id="updateap">Save changes</button>
                     </div>
                 </form>
 
@@ -208,6 +208,10 @@ include("../connection.php");
     };
 
     var EventClick = function (info) {
+        if (info.event.extendedProps.status =='2'){
+            return
+        }
+ 
         $('#exampleModal').modal('show');
         // $('#date').val(info.dateStr);
         $('#id').val(info.event.id);
@@ -221,6 +225,21 @@ include("../connection.php");
         $('#pet_baka').val(info.event.extendedProps.pet_breed);
         $('#pet_gender').val(info.event.extendedProps.pet_gender);
         $('#detail').val(info.event.extendedProps.detail);
+
+        if (info.event.extendedProps.doc_id === '' || info.event.extendedProps.doc_id === null) {
+            $('#radiobtn2').removeClass("d-none");
+            $('#updateap').removeClass("d-none");
+
+        } else {
+            if (!$("#radiobtn2").hasClass("d-none")) {
+
+                $('#radiobtn2').addClass("d-none");
+            }
+            if (!$("#updateap").hasClass("d-none")) {
+
+                $('#updateap').addClass("d-none");
+            }
+        }
         console.log(info.event);
     };
     $("#option").on("click", function () {
