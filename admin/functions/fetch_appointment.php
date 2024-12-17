@@ -49,7 +49,7 @@ if (isset($_POST['fetch_appointment'])) {
 if (isset($_POST['fetch_appointment_patient'])) {
 
     // var_dump($_POST);
-    $pid = $_POST['user_id'];
+    $pid = $_POST['fetch_appointment_patient']['user_id'];
 
 
     $query =
