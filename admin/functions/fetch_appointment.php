@@ -20,13 +20,13 @@ if (isset($_POST['fetch_appointment'])) {
 
     while ($row = $results->fetch_assoc()) {
         if ($row['status'] == '0' && $row['doc_id'] == "") {
-            $color = 'blue';
+            $color = '#FF9800';
         }
         if ($row['status'] == '0' && $row['doc_id'] != "") {
-            $color = 'yellow';
+            $color = '#03A9F4';
         }
         if ($row['status'] == '1'  ) {
-            $color = 'green';
+            $color = '#66BB6A';
         }
         $events[] = array(
             'id' => $row['id'],                       // Unique identifier for the event
@@ -77,13 +77,13 @@ if (isset($_POST['fetch_appointment_patient'])) {
 
     while ($row = $results->fetch_assoc()) {
         if ($row['status'] == '0' && $row['doc_id'] == "") {
-            $color = 'blue';
+            $color = '#FF9800';
         }
         if ($row['status'] == '0' && $row['doc_id'] != "") {
-            $color = 'yellow';
+            $color = '#03A9F4';
         }
         if ($row['status'] == '1'  ) {
-            $color = 'green';
+            $color = '#66BB6A';
         }
         $events[] = array(
             'id' => $row['id'],                       // Unique identifier for the event
