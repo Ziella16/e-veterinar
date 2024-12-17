@@ -100,9 +100,7 @@ if (isset($_POST['set_appointment'])) {
     $slot = $_POST['slot'];
     $email = $_POST['email'];
 
-    $var = [
-        'content' => 'Appointment Has Been Approved'
-    ];
+
 
     $time_slots = [
         1 => ['start' => '9:00AM', 'end' => '9:30AM'],
@@ -119,8 +117,13 @@ if (isset($_POST['set_appointment'])) {
         12 => ['start' => '4:00PM', 'end' => '4:30PM']
     ];
 
+
     $start = convertTo24HourFormat($time_slots[$slot]['start']);
     $end = convertTo24HourFormat($time_slots[$slot]['end']);
+
+     $var = [
+        'content' => "Appointment Has Been Approved $start For Your Pet"
+    ];
 
 
     $query =
@@ -128,6 +131,8 @@ if (isset($_POST['set_appointment'])) {
 
 
     $results = mysqli_query($database, $query);
+
+    
     sendmail($email, "Appointment Time", "",  $var );
 
     header('location:' . $site_url . '/admin/book_appointment.php');
